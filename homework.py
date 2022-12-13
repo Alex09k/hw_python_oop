@@ -14,7 +14,7 @@ class InfoMessage:
         'Длительность: {duration:.3f} ч.; '
         'Дистанция: {distance:.3f} км; '
         'Ср. скорость: {speed:.3f} км/ч; '
-        'Потрачено ккал: {calories:.3f}. '
+        'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:

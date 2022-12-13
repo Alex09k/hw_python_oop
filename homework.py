@@ -4,6 +4,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
+
     training_type: str
     duration: float
     distance: float
@@ -18,11 +19,13 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
+        """Информация о тренировке."""
         return self.MSG.format(**asdict(self))
 
 
 class Training:
     """Базовый класс тренировки."""
+
     M_IN_KM: int = 1000
     LEN_STEP: float = 0.65
     MIN_IN_H: int = 60
@@ -58,6 +61,7 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
+
     CALORIES_MEAN_SPEED_MULTIPLIER: int = 18
     CALORIES_MEAN_SPEED_SHIFT: float = 1.79
 
@@ -70,6 +74,7 @@ class Running(Training):
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
+
     CALORIES_WEIGHT_MULTIPLIER: float = 0.035
     CALORIES_SPEED_HEIGHT_MULTIPLIER: float = 0.029
     KMH_IN_MSEC: float = 0.278
@@ -91,6 +96,7 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
+
     LEN_STEP: float = 1.38
     CAL_MEN_SPED: float = 1.1
     CAL_WEI_MULT: int = 2

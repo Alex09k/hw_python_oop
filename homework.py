@@ -19,7 +19,7 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
-        """Информация о тренировке."""
+        """ Получить информацию о тренировке."""
         return self.MSG.format(**asdict(self))
 
 
@@ -48,7 +48,7 @@ class Training:
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
-        """Получить количество затраченных калорий."""
+        """Получить количество потаченных калорий."""
         raise NotImplementedError('Не реализованный метод')
 
     def show_training_info(self) -> InfoMessage:
@@ -66,6 +66,7 @@ class Running(Training):
     CALORIES_MEAN_SPEED_SHIFT: float = 1.79
 
     def get_spent_calories(self):
+        """Получить количество потаченных калорий."""
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT) * self.weight / self.M_IN_KM
                 * self.duration * self.MIN_IN_H
@@ -87,6 +88,7 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
+        """Получить количество потаченных калорий."""
         return (((self.CALORIES_WEIGHT_MULTIPLIER * self.weight
                 + ((self.get_mean_speed() * (self.KMH_IN_MSEC)) ** 2
                   / (self.height / self.CM_IN_M))
@@ -98,7 +100,7 @@ class Swimming(Training):
     """Тренировка: плавание."""
 
     LEN_STEP: float = 1.38
-    CAL_MEN_SPED: float = 1.1
+    CALORIES_SPEED_MULTIPLIER: float = 1.1
     CAL_WEI_MULT: int = 2
 
     def __init__(self, action: int, duration: float,
@@ -108,12 +110,14 @@ class Swimming(Training):
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
+        """Получить среднию скорость."""
         return (
             self.length_pool * self.count_pool / self.M_IN_KM / self.duration
         )
 
     def get_spent_calories(self) -> float:
-        return ((self.get_mean_speed() + self.CAL_MEN_SPED)
+        """Получить количество потаченных калорий."""
+        return ((self.get_mean_speed() + self.CALORIES_SPEED_MULTIPLIER)
                 * self.CAL_WEI_MULT * self.weight * self.duration)
 
 

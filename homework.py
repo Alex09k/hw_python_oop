@@ -101,7 +101,7 @@ class Swimming(Training):
 
     LEN_STEP: float = 1.38
     CALORIES_SPEED_MULTIPLIER: float = 1.1
-    CAL_WEI_MULT: int = 2
+    CALORIES_WEIGHT_MULTIPLIER: int = 2
 
     def __init__(self, action: int, duration: float,
                  weight: float, length_pool, count_pool) -> None:
@@ -118,7 +118,8 @@ class Swimming(Training):
     def get_spent_calories(self) -> float:
         """Получить количество потаченных калорий."""
         return ((self.get_mean_speed() + self.CALORIES_SPEED_MULTIPLIER)
-                * self.CAL_WEI_MULT * self.weight * self.duration)
+                * self.CALORIES_WEIGHT_MULTIPLIER
+                * self.weight * self.duration)
 
 
 def read_package(workout_type: str, data: list) -> Training:
